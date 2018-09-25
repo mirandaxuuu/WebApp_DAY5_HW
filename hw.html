@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Miranda's Tour Guide</title>
+
+    <style>
+    /*stylizing my page*/
+      html, p, select {
+        font-family: serif;
+      }
+      body {
+        width: 600px;
+        margin: 0 auto;
+        background-color: pink;
+      }
+      p {
+        line-height: 1.5;
+        letter-spacing: 0.1rem;
+        padding: 2rem;
+        background-color: white;
+      }
+      label {
+        width: 250px;
+        margin-right: 33px;
+        padding-left: 1rem;
+        font-size: 1.2rem;
+      }
+      select {
+        width: 400px;
+        height: 50px;
+        padding: 5px;
+      }
+      h1 {
+        padding-left: 1rem;
+        font-size: 2rem;
+      }
+      h2 {
+        padding-left: 1rem;
+        font-size: 1.5rem;
+      }
+      select {
+        font-size: 1.2rem;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <h1>Where do you want to go?</h1>
+
+    <!-- making selections -->
+
+    <form>
+      <label for="place-choose">Choose a place</label>
+      <select id="place-choose" name="place-choose">
+        <option>Miami</option>
+        <option>New York</option>
+        <option>Los Angeles</option>
+        <option>Las Vegas</option>
+        <option>Boston</option>
+      </select>
+    </form>
+
+    <h2>Check out this place!</h2>
+
+    <p>
+
+    </p>
+
+
+
+    <script>
+        
+
+
+        var placeChoose = document.querySelector('select');
+        // to get which city the user chooses
+
+        var descriptionDisplay = document.querySelector('p');
+        // where text will be displayed
+        
+        placeChoose.onchange = function() {
+          var place = placeChoose.value;
+          updateDisplay(place);
+        };   
+
+        
+        function updateDisplay(place) {
+            place = place.replace(" ", "")
+            place = place.toLowerCase();
+            var url = place + '.txt';
+            
+            // fetching data and get the response
+            fetch(url).then(function(response) {
+              response.text().then(function(text) {
+              descriptionDisplay.textContent = text;
+              // display the content of the txt file
+              });
+            }); 
+
+
+
+        };
+
+        updateDisplay('Miami');
+        placeChoose.value = "Miami";  
+        // preset a value for the starting page to load
+        
+    </script>
+  </body>
+</html>
